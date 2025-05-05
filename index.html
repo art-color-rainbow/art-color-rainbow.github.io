@@ -110,7 +110,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <span class="text-xl font-serif font-bold gradient-text">Dh@n@s</span>
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                        <div class="relative flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-primary/20">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-serif font-bold text-lg">D</div>
+                            <span class="text-xl font-serif font-bold gradient-text tracking-wider">Dh@n@s</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#about" class="nav-link text-gray-700 hover:text-primary transition">About</a>
@@ -143,7 +149,7 @@
             <div class="md:w-1/2 flex justify-center" data-aos="fade-left">
                 <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl floating">
                     <div class="w-full h-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-6xl">
-                        <i class="fas fa-palette"></i>
+                        <img src="https://images.pexels.com/photos/933255/pexels-photo-933255.jpeg" alt="Fine Art" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
@@ -221,9 +227,9 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Artwork 1 -->
-                <div class="artwork-card bg-white rounded-lg overflow-hidden shadow-md" data-aos="zoom-in">
+                <div class="artwork-card bg-white rounded-lg overflow-hidden shadow-md">
                     <div class="h-64 relative overflow-hidden">
-                        <img src="https://images.pexels.com/photos/1266808/pexels-photo-1266808.jpeg" alt="Nature's Whisper" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                        <img src="https://images.pexels.com/photos/102127/pexels-photo-102127.jpeg" alt="Nature's Whisper" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-4 text-white">
                                 <h3 class="text-xl font-serif font-bold">Nature's Whisper</h3>
@@ -234,9 +240,9 @@
                 </div>
                 
                 <!-- Artwork 2 -->
-                <div class="artwork-card bg-white rounded-lg overflow-hidden shadow-md" data-aos="zoom-in" data-aos-delay="100">
+                <div class="artwork-card bg-white rounded-lg overflow-hidden shadow-md">
                     <div class="h-64 relative overflow-hidden">
-                        <img src="https://images.pexels.com/photos/102127/pexels-photo-102127.jpeg" alt="Silent Struggles" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                        <img src="https://images.pexels.com/photos/1266808/pexels-photo-1266808.jpeg" alt="Silent Struggles" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-4 text-white">
                                 <h3 class="text-xl font-serif font-bold">Silent Struggles</h3>
@@ -247,9 +253,9 @@
                 </div>
                 
                 <!-- Artwork 3 -->
-                <div class="artwork-card bg-white rounded-lg overflow-hidden shadow-md" data-aos="zoom-in" data-aos-delay="200">
+                <div class="artwork-card bg-white rounded-lg overflow-hidden shadow-md">
                     <div class="h-64 relative overflow-hidden">
-                        <img src="https://images.pexels.com/photos/933255/pexels-photo-933255.jpeg" alt="Inner Landscape" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                        <img src="https://images.pexels.com/photos/262034/pexels-photo-262034.jpeg" alt="Inner Landscape" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-4 text-white">
                                 <h3 class="text-xl font-serif font-bold">Inner Landscape</h3>
@@ -339,7 +345,9 @@
         // Initialize AOS
         AOS.init({
             duration: 1000,
-            once: true
+            once: true,
+            offset: 100,
+            delay: 0
         });
 
         // GSAP Animations
