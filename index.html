@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vishakha Isapure - Fine Artist</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#5F4B8B', // Artistic purple
-                        secondary: '#E69A8D', // Soft coral
-                        accent: '#4A7B9D', // Muted teal
+                        primary: '#5F4B8B',
+                        secondary: '#E69A8D',
+                        accent: '#4A7B9D',
                         dark: '#2D3748',
                         light: '#F7FAFC'
                     },
@@ -35,6 +39,8 @@
         
         .artwork-card {
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
         .artwork-card:hover {
@@ -42,23 +48,74 @@
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
+        .artwork-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(95,75,139,0.1), rgba(230,154,141,0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .artwork-card:hover::before {
+            opacity: 1;
+        }
+
         .txt-justify {
             text-align: justify !important;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #5F4B8B;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #5F4B8B, #E69A8D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
 <body class="bg-light font-sans text-dark antialiased">
     <!-- Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <nav class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <span class="text-xl font-serif font-bold text-primary">Dh@n@s</span>
+                    <span class="text-xl font-serif font-bold gradient-text">Dh@n@s</span>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="text-gray-700 hover:text-primary transition">About</a>
-                    <a href="#artwork" class="text-gray-700 hover:text-primary transition">Artwork</a>
-                    <a href="#contact" class="text-gray-700 hover:text-primary transition">Contact</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-primary transition">About</a>
+                    <a href="#artwork" class="nav-link text-gray-700 hover:text-primary transition">Artwork</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-primary transition">Contact</a>
                 </div>
                 <div class="md:hidden flex items-center">
                     <button class="mobile-menu-button">
@@ -72,20 +129,19 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="hero-pattern py-20">
+    <header class="hero-pattern py-20 min-h-screen flex items-center">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-10 md:mb-0">
-                <h1 class="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">Vishakha Isapure</h1>
-                <h2 class="text-2xl md:text-3xl font-serif font-medium text-secondary mb-6">Fine Artist</h2>
+            <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
+                <h1 class="text-5xl md:text-6xl font-serif font-bold gradient-text mb-4">Vishakha Isapure</h1>
+                <h2 class="text-3xl md:text-4xl font-serif font-medium text-secondary mb-6">Fine Artist</h2>
                 <p class="text-lg text-gray-700 mb-8 max-w-lg txt-justify">Translating unspoken emotions into visual form through contemporary art.</p>
                 <div class="flex space-x-4">
-                    <a href="#contact" class="bg-primary hover:bg-opacity-90 text-white px-6 py-3 rounded-md transition">Contact Me</a>
-                    <a href="#artwork" class="border border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 rounded-md transition">View Artwork</a>
+                    <a href="#contact" class="bg-primary hover:bg-opacity-90 text-white px-6 py-3 rounded-md transition transform hover:scale-105">Contact Me</a>
+                    <a href="#artwork" class="border border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 rounded-md transition transform hover:scale-105">View Artwork</a>
                 </div>
             </div>
-            <div class="md:w-1/2 flex justify-center">
-                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl">
-                    <!-- Placeholder for artist image -->
+            <div class="md:w-1/2 flex justify-center" data-aos="fade-left">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl floating">
                     <div class="w-full h-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-6xl">
                         <i class="fas fa-palette"></i>
                     </div>
@@ -97,13 +153,13 @@
     <!-- About Section -->
     <section id="about" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-serif font-bold text-primary mb-2">About Me</h2>
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-serif font-bold gradient-text mb-2">About Me</h2>
                 <div class="w-20 h-1 bg-secondary mx-auto"></div>
             </div>
             
             <div class="flex flex-col md:flex-row gap-12">
-                <div class="md:w-1/2">
+                <div class="md:w-1/2" data-aos="fade-right">
                     <p class="text-lg text-gray-700 mb-6 txt-justify">
                         I am Vishakha Isapure, working as a contemporary artist. I completed my post-graduation in Fine Arts from Kavikulaguru Kalidas Sanskrit University. My work is dedicated to translating unspoken emotions and stories into visual form, blending classical techniques with deep emotional expression.
                     </p>
@@ -114,21 +170,30 @@
                         I am especially inspired by the emotional landscapes we carry within, as well as the visible and invisible marks we leave on the natural world. Through layered textures, thoughtful forms, and subtle color palettes, my paintings create quiet spaces for reflection and connection.
                     </p>
                 </div>
-                <div class="md:w-1/2">
-                    <div class="bg-gray-50 p-8 rounded-lg border-l-4 border-primary">
-                        <h3 class="text-xl font-serif font-bold text-primary mb-4">Artistic Journey</h3>
+                <div class="md:w-1/2" data-aos="fade-left">
+                    <div class="bg-gray-50 p-8 rounded-lg border-l-4 border-primary transform hover:scale-105 transition duration-300">
+                        <h3 class="text-xl font-serif font-bold gradient-text mb-4">Artistic Journey</h3>
                         <div class="space-y-6">
-                            <div>
-                                <h4 class="font-semibold text-accent">Education</h4>
-                                <p class="text-gray-700">Post-Graduation in Fine Arts from Kavikulaguru Kalidas Sanskrit University</p>
+                            <div class="flex items-start">
+                                <i class="fas fa-graduation-cap text-accent mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-semibold text-accent">Education</h4>
+                                    <p class="text-gray-700">Post-Graduation in Fine Arts from Kavikulaguru Kalidas Sanskrit University</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-semibold text-accent">Specialization</h4>
-                                <p class="text-gray-700">Contemporary Art, Emotional Landscapes, Human-Nature Connection</p>
+                            <div class="flex items-start">
+                                <i class="fas fa-paint-brush text-accent mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-semibold text-accent">Specialization</h4>
+                                    <p class="text-gray-700">Contemporary Art, Emotional Landscapes, Human-Nature Connection</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-semibold text-accent">Techniques</h4>
-                                <p class="text-gray-700">Layered textures, organic forms, symbolic imagery, mixed media</p>
+                            <div class="flex items-start">
+                                <i class="fas fa-layer-group text-accent mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-semibold text-accent">Techniques</h4>
+                                    <p class="text-gray-700">Layered textures, organic forms, symbolic imagery, mixed media</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -140,12 +205,12 @@
     <!-- Artwork Section -->
     <section id="artwork" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-serif font-bold text-primary mb-2">About My Artwork</h2>
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-serif font-bold gradient-text mb-2">About My Artwork</h2>
                 <div class="w-20 h-1 bg-secondary mx-auto"></div>
             </div>
             
-            <div class="mb-12">
+            <div class="mb-12" data-aos="fade-up">
                 <p class="text-lg text-gray-700 mb-6 txt-justify">
                     Studying Fine Arts shaped both my technical skills and artistic vision, giving me a strong foundation in still life, portraiture, and conceptual painting. Early on, I focused on realistic works exploring feminine emotion and human expression. This taught me the power of observation, detail, and emotional depth.
                 </p>
@@ -156,35 +221,41 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Artwork 1 -->
-                <div class="artwork-card bg-white rounded-lg overflow-hidden shadow-md">
-                    <div class="h-64 bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-5xl">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-serif font-bold text-primary mb-2">Nature's Whisper</h3>
-                        <p class="text-gray-600">Mixed media on canvas, 2023</p>
+                <div class="artwork-card bg-white rounded-lg overflow-hidden shadow-md" data-aos="zoom-in">
+                    <div class="h-64 relative overflow-hidden">
+                        <img src="https://images.pexels.com/photos/1266808/pexels-photo-1266808.jpeg" alt="Nature's Whisper" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-4 text-white">
+                                <h3 class="text-xl font-serif font-bold">Nature's Whisper</h3>
+                                <p class="text-sm">Mixed media on canvas, 2023</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Artwork 2 -->
-                <div class="artwork-card bg-white rounded-lg overflow-hidden shadow-md">
-                    <div class="h-64 bg-gradient-to-br from-secondary to-primary flex items-center justify-center text-white text-5xl">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-serif font-bold text-primary mb-2">Silent Struggles</h3>
-                        <p class="text-gray-600">Oil on canvas, 2022</p>
+                <div class="artwork-card bg-white rounded-lg overflow-hidden shadow-md" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="h-64 relative overflow-hidden">
+                        <img src="https://images.pexels.com/photos/102127/pexels-photo-102127.jpeg" alt="Silent Struggles" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-4 text-white">
+                                <h3 class="text-xl font-serif font-bold">Silent Struggles</h3>
+                                <p class="text-sm">Oil on canvas, 2022</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Artwork 3 -->
-                <div class="artwork-card bg-white rounded-lg overflow-hidden shadow-md">
-                    <div class="h-64 bg-gradient-to-br from-accent to-secondary flex items-center justify-center text-white text-5xl">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-serif font-bold text-primary mb-2">Inner Landscape</h3>
-                        <p class="text-gray-600">Acrylic and texture, 2023</p>
+                <div class="artwork-card bg-white rounded-lg overflow-hidden shadow-md" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="h-64 relative overflow-hidden">
+                        <img src="https://images.pexels.com/photos/933255/pexels-photo-933255.jpeg" alt="Inner Landscape" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-4 text-white">
+                                <h3 class="text-xl font-serif font-bold">Inner Landscape</h3>
+                                <p class="text-sm">Acrylic and texture, 2023</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -192,101 +263,125 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-primary text-white">
+    <section id="contact" class="py-20 bg-gradient-to-br from-primary to-accent text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-serif font-bold mb-2">Get In Touch</h2>
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-serif font-bold mb-2">Get In Touch</h2>
                 <div class="w-20 h-1 bg-secondary mx-auto"></div>
             </div>
             
             <div class="flex flex-col md:flex-row gap-12">
-                <div class="md:w-1/2">
+                <div class="md:w-1/2" data-aos="fade-right">
                     <h3 class="text-xl font-serif font-bold mb-6">Contact Information</h3>
                     <div class="space-y-6">
-                        <div class="flex items-start">
+                        <div class="flex items-start transform hover:scale-105 transition duration-300">
                             <div class="flex-shrink-0 mt-1">
-                                <i class="fas fa-phone-alt text-secondary"></i>
+                                <i class="fas fa-phone-alt text-secondary text-xl"></i>
                             </div>
                             <div class="ml-4">
                                 <p class="font-medium">Phone</p>
-                                <p>7743813290</p>
+                                <a href="tel:7743813290" class="hover:text-secondary transition">7743813290</a>
                             </div>
                         </div>
-                        <div class="flex items-start">
+                        <div class="flex items-start transform hover:scale-105 transition duration-300">
                             <div class="flex-shrink-0 mt-1">
-                                <i class="fas fa-envelope text-secondary"></i>
+                                <i class="fas fa-envelope text-secondary text-xl"></i>
                             </div>
                             <div class="ml-4">
                                 <p class="font-medium">Email</p>
-                                <p>isapurevishakha@gmail.com</p>
+                                <a href="mailto:isapurevishakha@gmail.com" class="hover:text-secondary transition">isapurevishakha@gmail.com</a>
                             </div>
                         </div>
-                        <div class="flex items-start">
+                        <div class="flex items-start transform hover:scale-105 transition duration-300">
                             <div class="flex-shrink-0 mt-1">
-                                <i class="fab fa-instagram text-secondary"></i>
+                                <i class="fab fa-instagram text-secondary text-xl"></i>
                             </div>
                             <div class="ml-4">
                                 <p class="font-medium">Instagram</p>
-                                <p>@art.color.rainbow</p>
+                                <a href="https://instagram.com/art.color.rainbow" target="_blank" rel="noopener noreferrer" class="hover:text-secondary transition">@art.color.rainbow</a>
                             </div>
                         </div>
-                        <div class="flex items-start">
+                        <div class="flex items-start transform hover:scale-105 transition duration-300">
                             <div class="flex-shrink-0 mt-1">
-                                <i class="fab fa-facebook-f text-secondary"></i>
+                                <i class="fab fa-facebook-f text-secondary text-xl"></i>
                             </div>
                             <div class="ml-4">
                                 <p class="font-medium">Facebook</p>
-                                <p>Vishakha Isapure</p>
+                                <a href="https://www.facebook.com/p/Vishakha-Isapure-100010578601549/" target="_blank" rel="noopener noreferrer" class="hover:text-secondary transition">Vishakha Isapure</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="md:w-1/2">
+                <div class="md:w-1/2" data-aos="fade-left">
                     <h3 class="text-xl font-serif font-bold mb-6">Send a Message</h3>
                     <form class="space-y-6">
                         <div>
                             <label for="name" class="block mb-1">Name</label>
-                            <input type="text" id="name" class="w-full px-4 py-2 rounded bg-primary border border-white bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-secondary">
+                            <input type="text" id="name" class="w-full px-4 py-2 rounded bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-secondary">
                         </div>
                         <div>
                             <label for="email" class="block mb-1">Email</label>
-                            <input type="email" id="email" class="w-full px-4 py-2 rounded bg-primary border border-white bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-secondary">
+                            <input type="email" id="email" class="w-full px-4 py-2 rounded bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-secondary">
                         </div>
                         <div>
                             <label for="message" class="block mb-1">Message</label>
-                            <textarea id="message" rows="4" class="w-full px-4 py-2 rounded bg-primary border border-white bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-secondary"></textarea>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 rounded bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-secondary"></textarea>
                         </div>
-                        <button type="submit" class="bg-secondary hover:bg-opacity-90 text-white px-6 py-3 rounded-md transition">Send Message</button>
+                        <button type="submit" class="bg-secondary hover:bg-opacity-90 text-white px-6 py-3 rounded-md transition transform hover:scale-105">Send Message</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; 2025 Vishakha Isapure. All rights reserved.</p>
-            <div class="flex justify-center space-x-6 mt-4">
-                <a href="https://www.instagram.com/art.color.rainbow/" class="text-gray-400 hover:text-white transition">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.facebook.com/p/Vishakha-Isapure-100010578601549/" class="text-gray-400 hover:text-white transition">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="mailto:isapurevishakha@gmail.com" class="text-gray-400 hover:text-white transition">
-                    <i class="fas fa-envelope"></i>
-                </a>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        // Mobile menu toggle functionality would go here
-        document.querySelector('.mobile-menu-button').addEventListener('click', function() {
-            // Implement mobile menu toggle
-            console.log('Mobile menu clicked');
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate hero section
+        gsap.from(".hero-pattern h1", {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: "power3.out"
+        });
+
+        gsap.from(".hero-pattern h2", {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            delay: 0.2,
+            ease: "power3.out"
+        });
+
+        gsap.from(".hero-pattern p", {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            delay: 0.4,
+            ease: "power3.out"
+        });
+
+        // Animate artwork cards on scroll
+        gsap.utils.toArray(".artwork-card").forEach(card => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top bottom-=100",
+                    toggleActions: "play none none reverse"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
         });
     </script>
 </body>
