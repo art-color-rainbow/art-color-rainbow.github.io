@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artwork Details - Vishakha Isapure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+        .gradient-text {
+            background: linear-gradient(45deg, #5F4B8B, #E69A8D);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="bg-light font-sans text-dark antialiased">
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html#gallery" class="flex items-center space-x-2">
+                        <i class="fas fa-arrow-left text-primary text-xl"></i>
+                        <span class="text-primary font-serif">Back to Gallery</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Artwork Details Section -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Artwork Image -->
+                <div class="lg:sticky lg:top-24">
+                    <img id="artwork-image" src="" alt="" class="w-full h-auto rounded-lg shadow-xl">
+                </div>
+
+                <!-- Artwork Details -->
+                <div class="space-y-8">
+                    <div>
+                        <h1 id="artwork-title" class="text-4xl font-serif font-bold gradient-text mb-2"></h1>
+                        <div class="w-20 h-1 bg-secondary"></div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-serif font-bold text-primary mb-2">Details</h3>
+                            <p id="artwork-details" class="text-gray-700"></p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-serif font-bold text-primary mb-2">Description</h3>
+                            <p id="artwork-description" class="text-gray-700"></p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-serif font-bold text-primary mb-2">Exhibition History</h3>
+                            <p id="artwork-exhibition" class="text-gray-700"></p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-serif font-bold text-primary mb-2">Technical Information</h3>
+                            <p id="artwork-technical" class="text-gray-700"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Get artwork details from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const artworkId = urlParams.get('id');
+
+        // Artwork data
+        const artworks = {
+            'natures-whisper': {
+                title: "Nature's Whisper",
+                image: "https://images.pexels.com/photos/102127/pexels-photo-102127.jpeg",
+                details: "Mixed media on canvas, 2023",
+                description: "A contemplative piece exploring the delicate balance between human emotion and natural elements. The layered textures create a sense of depth and movement, inviting viewers to reflect on their connection with nature.",
+                exhibition: "Solo Exhibition 'Whispers of Nature', Mumbai Art Gallery, 2023",
+                technical: "Mixed media on canvas, 36 x 48 inches"
+            },
+            'silent-struggles': {
+                title: "Silent Struggles",
+                image: "https://images.pexels.com/photos/1266808/pexels-photo-1266808.jpeg",
+                details: "Oil on canvas, 2022",
+                description: "This powerful work captures the internal conflicts and unspoken emotions that shape our daily lives. The rich oil textures and dramatic composition create a compelling visual narrative.",
+                exhibition: "Group Show 'Inner Voices', Delhi Contemporary Art Space, 2022",
+                technical: "Oil on canvas, 40 x 30 inches"
+            },
+            'inner-landscape': {
+                title: "Inner Landscape",
+                image: "https://images.pexels.com/photos/262034/pexels-photo-262034.jpeg",
+                details: "Acrylic and texture, 2023",
+                description: "An exploration of the emotional terrain within us, this piece combines abstract elements with figurative suggestions to create a map of the human psyche.",
+                exhibition: "Biennale 'Contemporary Expressions', Bangalore Art Fair, 2023",
+                technical: "Acrylic and mixed media on canvas, 48 x 36 inches"
+            }
+        };
+
+        // Update page content with artwork details
+        if (artworkId && artworks[artworkId]) {
+            const artwork = artworks[artworkId];
+            document.getElementById('artwork-image').src = artwork.image;
+            document.getElementById('artwork-image').alt = artwork.title;
+            document.getElementById('artwork-title').textContent = artwork.title;
+            document.getElementById('artwork-details').textContent = artwork.details;
+            document.getElementById('artwork-description').textContent = artwork.description;
+            document.getElementById('artwork-exhibition').textContent = artwork.exhibition;
+            document.getElementById('artwork-technical').textContent = artwork.technical;
+            document.title = `${artwork.title} - Vishakha Isapure`;
+        }
+    </script>
+</body>
+
+</html>
